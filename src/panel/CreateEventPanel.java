@@ -6,6 +6,7 @@ import core.Events;
 import java.awt.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class CreateEventPanel extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -84,7 +85,7 @@ public class CreateEventPanel extends JPanel {
         // Back Button
         JButton backButton = new JButton("Back to Writer Panel");
         styleButton(backButton);
-        backButton.addActionListener(e -> cardLayout.show(cardPanel, "writerMainPanel")); // Changed to writerMainPanel
+        backButton.addActionListener(e -> cardLayout.show(cardPanel, "writerMainPanel"));
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(new Color(245, 240, 230));
@@ -110,12 +111,23 @@ public class CreateEventPanel extends JPanel {
             return;
         }
 
-        // Validate date format
+        // Validate date format and ensure not in the past
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dateFormat.setLenient(false);
         Timestamp date;
         try {
             date = new Timestamp(dateFormat.parse(dateStr).getTime());
+            // Check if date is before today
+            Calendar today = Calendar.getInstance();
+            today.set(Calendar.HOUR_OF_DAY, 0);
+            today.set(Calendar.MINUTE, 0);
+            today.set(Calendar.SECOND, 0);
+            today.set(Calendar.MILLISECOND, 0);
+            Timestamp todayMidnight = new Timestamp(today.getTimeInMillis());
+            if (date.before(todayMidnight)) {
+                JOptionPane.showMessageDialog(this, "Event date cannot be in the past!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Invalid date format! Use YYYY-MM-DD HH:MM:SS", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -136,16 +148,16 @@ public class CreateEventPanel extends JPanel {
 
         Events event = new Events(authorId, name, date, capacity, address);
         boolean success = eventDAO.addEvent(event);
-		if (success) {
-		    JOptionPane.showMessageDialog(this, "Event created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-		    nameField.setText("");
-		    dateField.setText("");
-		    capacityField.setText("");
-		    addressArea.setText("");
-		    cardLayout.show(cardPanel, "writerMainPanel");
-		} else {
-		    JOptionPane.showMessageDialog(this, "Failed to create event! Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-		}
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Event created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            nameField.setText("");
+            dateField.setText("");
+            capacityField.setText("");
+            addressArea.setText("");
+            cardLayout.show(cardPanel, "writerMainPanel");
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to create event! Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void styleLabel(JLabel label) {

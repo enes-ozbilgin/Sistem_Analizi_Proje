@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import panel.AddBookPanel;
 import panel.AddWriterPanel;
+import panel.ManagerLoginPanel;
 import panel.ManagerPanel;
 import panel.ReaderLoginPanel;
 import panel.ReaderMainPanel;
@@ -73,6 +74,7 @@ public class MainFrame extends JFrame {
         cardPanel.add(writerLogin, "writerLoginPanel");
         cardPanel.add(new WriterMainPanel(cardLayout, cardPanel, new WriterDAO(conn), new FeedbackDAO(conn), 0), "writerMainPanel");
         cardPanel.add(new ManagerReportPanel(cardLayout, cardPanel, new FeedbackDAO(conn), new WriterDAO(conn), new BookDAO(conn)), "managerReportPanel");
+        cardPanel.add(new ManagerLoginPanel(cardLayout, cardPanel), "managerLoginPanel");
         cardPanel.add(new TopRatedBooksPanel(cardLayout, cardPanel, new FeedbackDAO(conn), new BookDAO(conn)), "topRated");
         
         

@@ -32,7 +32,7 @@ public class MainMenu extends JPanel {
         readerButton.addActionListener(e -> cardLayout.show(cardPanel, "readerPanel"));
 
         JButton managerButton = createStyledButton("Manager");
-        managerButton.addActionListener(e -> cardLayout.show(cardPanel, "managerPanel"));
+        managerButton.addActionListener(e -> cardLayout.show(cardPanel, "managerLoginPanel"));
 
         JButton writerButton = createStyledButton("Writer");
         writerButton.addActionListener(e -> cardLayout.show(cardPanel, "writerPanel"));
@@ -58,5 +58,3 @@ public class MainMenu extends JPanel {
         return button;
     }
 }
-
-

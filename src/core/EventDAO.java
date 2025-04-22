@@ -103,6 +103,26 @@ public class EventDAO {
         }
         return eventList;
     }
+    public List<Events> getNonExpiredEvents() {
+        List<Events> events = new ArrayList<>();
+        String query = "SELECT * FROM events WHERE date >= CURRENT_DATE";
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                events.add(new Events(
+                    rs.getInt("author_id"),
+                    rs.getString("name"),
+                    rs.getTimestamp("date"),
+                    rs.getInt("capacity"),
+                    rs.getString("address")
+                ));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching non-expired events: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return events;
+    }
 
     public boolean authorExists(int authorId) {
         String query = "SELECT 1 FROM authors WHERE id = ?";

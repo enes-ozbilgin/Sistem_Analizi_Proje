@@ -3,7 +3,6 @@ package panel;
 import core.EventDAO;
 import core.Events;
 import core.TicketDAO;
-
 import javax.swing.*;
 import java.awt.*;
 import java.sql.PreparedStatement;
@@ -44,10 +43,10 @@ public class AddEventPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
         // Populate events
-        List<Events> events = eventDAO.getAllEvents();
+        List<Events> events = eventDAO.getNonExpiredEvents();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (events.isEmpty()) {
-            JLabel noEventsLabel = new JLabel("No events available.");
+            JLabel noEventsLabel = new JLabel("No upcoming events available.");
             noEventsLabel.setFont(new Font("Serif", Font.PLAIN, 18));
             noEventsLabel.setForeground(new Color(102, 51, 0));
             eventsPanel.add(noEventsLabel);
