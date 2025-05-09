@@ -40,7 +40,6 @@ CREATE TABLE `authors` (
 
 LOCK TABLES `authors` WRITE;
 /*!40000 ALTER TABLE `authors` DISABLE KEYS */;
-INSERT INTO `authors` VALUES (1,'enes','enes-mtb@hotmail.com','enes','enes'),(2,'kaan','kaan-mtb@hotmail.com','kaan','kaan');
 /*!40000 ALTER TABLE `authors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +68,6 @@ CREATE TABLE `books` (
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` VALUES (1,1,'balık','2025-04-01 00:00:00','balıkçı');
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +88,7 @@ CREATE TABLE `events` (
   PRIMARY KEY (`id`),
   KEY `author_id` (`author_id`),
   CONSTRAINT `events_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +97,6 @@ CREATE TABLE `events` (
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
-INSERT INTO `events` VALUES (2,1,'Balikci fanclub','2003-12-03 00:00:00',100,'konya/akşehir'),(3,1,'Book Signing','2025-04-20 14:30:00',50,'123 Main St'),(4,1,'Reading Session','2025-05-01 15:00:00',30,'456 Oak Ave'),(5,1,'Book Signing','2025-04-20 14:30:00',50,'123 Main St'),(6,1,'Reading Session','2025-05-01 15:00:00',30,'456 Oak Ave'),(7,1,'karnım aç','2026-12-03 12:00:00',100,'oak street.');
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +119,7 @@ CREATE TABLE `feedback` (
   KEY `book_id` (`book_id`),
   CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`reader_id`) REFERENCES `readers` (`id`) ON DELETE CASCADE,
   CONSTRAINT `feedback_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +128,6 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (1,1,1,5,'2025-04-21 20:06:25','çok iyi'),(2,2,1,1,'2025-04-21 20:23:44','çok kötü'),(3,1,1,4,'2025-04-23 11:38:47','sdasbddhajdadkwjdndad');
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +155,6 @@ CREATE TABLE `readers` (
 
 LOCK TABLES `readers` WRITE;
 /*!40000 ALTER TABLE `readers` DISABLE KEYS */;
-INSERT INTO `readers` VALUES (1,'Enes','enes-mtb@hotmail.com','03emin30'),(2,'kaan','kaan-mtb@hotmail.com','03emin30'),(3,'büşra','büşra-mtb@hotmail.com','03büşra30');
 /*!40000 ALTER TABLE `readers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,7 +184,6 @@ CREATE TABLE `tickets` (
 
 LOCK TABLES `tickets` WRITE;
 /*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
-INSERT INTO `tickets` VALUES (1,1,4,'2025-04-20 16:06:24'),(2,1,3,'2025-04-20 17:04:09'),(3,1,2,'2025-04-20 17:54:06'),(4,2,2,'2025-04-20 17:54:29');
 /*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -202,4 +196,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-09 14:40:48
+-- Dump completed on 2025-04-21 21:20:59
